@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeadtoClose (Freelance Hub) — Freelancer Client Lifecycle Engine | Aanand AB</title>
+  <meta name="description" content="Production-grade Flutter 3.24 CRM for freelance software engineers & agencies — covering lead capture, 7-stage Kanban, line-item proposals, contracts, time tracking, and invoicing.">
+  <link rel="stylesheet" href="../assets/css/project-pages.css">
+  <script src="../assets/js/audio-fx.js" defer></script>
+  <style>
+    /* LeadtoClose Specific Styles */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+    .kanban-col {
+      background: rgba(10, 10, 8, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+    }
+    .kanban-col-header {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .kanban-count {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.68rem;
+    }
+    .deal-card {
+      background: #141410;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-left: 3px solid var(--acid);
+      border-radius: 4px;
+      padding: 0.75rem;
+      margin-bottom: 0.6rem;
+      cursor: grab;
+      transition: all 0.2s;
+    }
+    .deal-card:hover {
+      border-color: var(--acid-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .deal-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+    }
+    .deal-client {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .deal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--acid);
+    }
+    .deal-advance-btn {
+      background: none;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .deal-advance-btn:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+    }
+    .pipeline-summary {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+    .summary-stat strong {
+      color: var(--acid);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="project-header">
+    <a href="../index.html" class="back-link" onclick="window.cyberAudio?.playClick()">← Return to 3D Space</a>
+    <div class="project-brand">◈ AANAND AB // ARCHIVE 01</div>
+    <div class="header-cta-group">
+      <a href="https://github.com/AanandAB/LeadtoClose" target="_blank" rel="noopener" class="btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.78rem;">GitHub Repo ↗</a>
+      <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20reviewed%20your%20LeadtoClose%20CRM%20project%20and%20would%20like%20to%20discuss%20a%20custom%20app" class="hire-btn-nav" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Hire for This →</a>
+    </div>
+  </header>
+
+  <div class="project-container">
+
+    <!-- Hero Section -->
+    <div class="project-hero">
+      <div class="project-badge-row">
+        <span class="tag-badge">FLUTTER 3.24</span>
+        <span class="tag-badge cyan">RIVERPOD 2.X</span>
+        <span class="tag-badge gold">LOCAL-FIRST HIVE</span>
+        <span class="tag-badge">WINDOWS · MACOS · ANDROID</span>
+      </div>
+      <h1 class="project-title">LeadtoClose <span>(Freelance Hub)</span></h1>
+      <p class="project-subtitle">
+        A full-featured, zero-latency desktop and mobile CRM suite engineered for independent developers and digital consultancies — managing the complete client journey from cold outreach to signed contracts and paid invoices.
+      </p>
+      <div class="project-actions-row">
+        <a href="#interactive-demo" class="btn-primary" onclick="window.cyberAudio?.playClick()">Test Live Kanban Engine ↓</a>
+        <a href="https://github.com/AanandAB/LeadtoClose" target="_blank" rel="noopener" class="btn-secondary">Inspect Source Code ↗</a>
+      </div>
+    </div>
+
+    <!-- Metrics Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">7-Stage</div>
+        <div class="metric-label">Visual Kanban Pipeline</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0ms</div>
+        <div class="metric-label">Cloud Latency (Hive Offline-First)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">360°</div>
+        <div class="metric-label">Unified Client Activity Timeline</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">100%</div>
+        <div class="metric-label">Data Privacy (Local Encryption)</div>
+      </div>
+    </div>
+
+    <!-- Interactive Live Widget: Interactive Pipeline Simulator -->
+    <section id="interactive-demo" class="interactive-widget-section">
+      <div class="widget-header">
+        <div class="widget-title">
+          <span>⚡</span> Live 7-Stage Pipeline Simulator
+        </div>
+        <div class="live-pill">
+          <span class="live-dot"></span> Interactive Simulation
+        </div>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">
+        Click <strong>"Advance →"</strong> on any deal to simulate moving client prospects through the LeadtoClose funnel. Watch the total active pipeline value and conversion calculations react instantly in real time.
+      </p>
+
+      <div class="kanban-board" id="kanbanBoard">
+        <!-- Injected dynamically via JS -->
+      </div>
+
+      <div class="pipeline-summary">
+        <div class="summary-stat">Total Pipeline: <strong id="totalPipelineVal">₹2,45,000</strong></div>
+        <div class="summary-stat">Won Deals: <strong id="wonDealsVal">₹95,000</strong></div>
+        <div class="summary-stat">Win Rate: <strong id="winRateVal">42%</strong></div>
+      </div>
+    </section>
+
+    <!-- Deep Architecture Breakdown -->
+    <h2 class="section-heading">Core System Architecture</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">7-Stage Deal Pipeline</h3>
+        <p class="feature-desc">
+          Structured sales funnel from <em>New Lead → Contacted → Qualified → Proposal Sent → Negotiation → Won → Lost</em>. Features dynamic lead health scoring (hot, warm, cold) and automated conversion into billable contracts in one tap.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h3 class="feature-title">Local-First Hive Storage</h3>
+        <p class="feature-desc">
+          No mandatory monthly SaaS subscriptions or remote cloud dependency. Client records, task milestones, and billing documents persist in encrypted local binary Hive boxes with instant millisecond search.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3 class="feature-title">Integrated Time & Stopwatch Tracker</h3>
+        <p class="feature-desc">
+          Precision project time-logging tool that links billable hours directly to client invoices. Tracks budget-vs-actual hours with weekly efficiency breakdowns and multi-currency billing presets.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📑</div>
+        <h3 class="feature-title">Proposals, SOW & Contracts</h3>
+        <p class="feature-desc">
+          Built-in templates for Statements of Work (SOW), Master Service Agreements (MSA), and Non-Disclosure Agreements (NDA). Automatically interpolates client metadata into legally formatted documents.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧾</div>
+        <h3 class="feature-title">Automated Invoicing & Tax Engine</h3>
+        <p class="feature-desc">
+          Draft, send, and audit invoices with automatic overdue status alerts, line-item discounts, GST computation, and payment status dashboards.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Dual Theme & Desktop Inno Setup</h3>
+        <p class="feature-desc">
+          Tailored light/dark high-contrast design with keyboard accelerators. Shipped with a production Inno Setup Windows installer script (`setup.iss`) for single-click desktop deployment.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tech Stack Table -->
+    <h2 class="section-heading">Technical Specifications</h2>
+    <table class="tech-table">
+      <thead>
+        <tr>
+          <th>Subsystem</th>
+          <th>Technology</th>
+          <th>Implementation Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Core Framework</td>
+          <td>Flutter 3.24 (Dart 3.5)</td>
+          <td>Multi-platform compilation targeting Windows, macOS, iOS, and Android</td>
+        </tr>
+        <tr>
+          <td>State Management</td>
+          <td>Riverpod 2.x</td>
+          <td>Immutable reactive state architecture with auto-disposing providers</td>
+        </tr>
+        <tr>
+          <td>Routing</td>
+          <td>GoRouter 14.x</td>
+          <td>Declarative URL-based deep linking for multi-window desktop navigation</td>
+        </tr>
+        <tr>
+          <td>Data Persistence</td>
+          <td>Hive 2.2 Local Box Engine</td>
+          <td>Lightweight, lightning-fast NoSQL key-value store with TypeAdapters</td>
+        </tr>
+        <tr>
+          <td>Packaging</td>
+          <td>Inno Setup / Gradle</td>
+          <td>Packaged native 64-bit Windows executable and signed release APK</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Code Architecture Preview -->
+    <h2 class="section-heading">State Architecture Sample</h2>
+    <pre class="code-block"><code><span class="keyword">@riverpod</span>
+<span class="keyword">class</span> <span class="func">PipelineNotifier</span> <span class="keyword">extends</span> _$PipelineNotifier {
+  <span class="keyword">@override</span>
+  <span class="func">PipelineSummary</span> build() {
+    <span class="keyword">final</span> leadsBox = Hive.box&lt;Lead&gt;(<span class="string">'leads_cache'</span>);
+    <span class="keyword">return</span> <span class="func">_calculateMetrics</span>(leadsBox.values.toList());
+  }
+
+  <span class="keyword">Future&lt;void&gt;</span> <span class="func">advanceStage</span>(String leadId, DealStage nextStage) <span class="keyword">async</span> {
+    <span class="keyword">final</span> lead = state.findLead(leadId);
+    lead.stage = nextStage;
+    <span class="keyword">await</span> lead.save(); <span class="comment">// Instantly committed to Hive binary box</span>
+    state = <span class="func">_calculateMetrics</span>(state.allLeads);
+  }
+}</code></pre>
+
+    <!-- Client CTA Section -->
+    <div class="client-pitch-card">
+      <h2 class="client-pitch-title">Want a Custom CRM or Internal Business Tool?</h2>
+      <p class="client-pitch-text">
+        Whether you need an offline-first enterprise dashboard, a field sales management app, or an automated client billing portal, I engineer robust systems built to scale your business operations.
+      </p>
+      <div class="pitch-btn-group">
+        <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20saw%20your%20LeadtoClose%20project%20and%20want%20to%20hire%20you%20for%20a%20custom%20software%20project" class="btn-primary" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Discuss Your Project on WhatsApp →</a>
+        <a href="mailto:aanandab44@gmail.com?subject=Consultation%20Request%20-%20Custom%20App" class="btn-secondary">Email aanandab44@gmail.com</a>
+      </div>
+    </div>
+
+    <!-- Navigation to next project -->
+    <div class="project-nav-bar">
+      <a href="../index.html" class="nav-prev">
+        <span class="nav-direction">Back to Portal</span>
+        <span class="nav-target-name">← 3D Main Showcase</span>
+      </a>
+      <a href="omnigraph.html" class="nav-next" style="text-align:right;">
+        <span class="nav-direction">Next Project</span>
+        <span class="nav-target-name">OmniGraph (Graph Engine) →</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // Interactive Kanban Simulation Logic
+    const stages = [
+      { id: 'lead', name: 'New Lead' },
+      { id: 'contact', name: 'Contacted' },
+      { id: 'proposal', name: 'Proposal' },
+      { id: 'negotiation', name: 'Negotiation' },
+      { id: 'won', name: 'Won & Active' }
+    ];
+
+    let deals = [
+      { id: 1, title: 'E-Commerce Redesign', client: 'Malabar Silks Ltd', value: 85000, stage: 'lead' },
+      { id: 2, title: 'Flutter POS System', client: 'Cafe Royale Co', value: 65000, stage: 'contact' },
+      { id: 3, title: 'Cloudflare Worker API', client: 'Fintech Spark', value: 45000, stage: 'proposal' },
+      { id: 4, title: 'Logistics Driver App', client: 'Kerala Express', value: 50000, stage: 'negotiation' },
+      { id: 5, title: 'Aquarium CMS Portal', client: 'Happy Aquatic', value: 95000, stage: 'won' }
+    ];
+
+    function renderKanban() {
+      const container = document.getElementById('kanbanBoard');
+      container.innerHTML = '';
+
+      stages.forEach((stage, idx) => {
+        const colDeals = deals.filter(d => d.stage === stage.id);
+        const col = document.createElement('div');
+        col.className = 'kanban-col';
+        col.innerHTML = `
+          <div class="kanban-col-header">
+            <span>${stage.name}</span>
+            <span class="kanban-count">${colDeals.length}</span>
+          </div>
+          <div class="kanban-col-cards">
+            ${colDeals.map(d => `
+              <div class="deal-card">
+                <div class="deal-title">${d.title}</div>
+                <div class="deal-client">${d.client}</div>
+                <div class="deal-footer">
+                  <span>₹${d.value.toLocaleString()}</span>
+                  ${idx < stages.length - 1 ? `<button class="deal-advance-btn" onclick="advanceDeal(${d.id})">Advance →</button>` : `<span style="color:#00f0ff;font-size:0.65rem;">WON ✓</span>`}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(col);
+      });
+
+      // Update Summary
+      const totalPipeline = deals.reduce((acc, d) => acc + d.value, 0);
+      const wonDeals = deals.filter(d => d.stage === 'won').reduce((acc, d) => acc + d.value, 0);
+      const winRate = Math.round((deals.filter(d => d.stage === 'won').length / deals.length) * 100);
+
+      document.getElementById('totalPipelineVal').textContent = '₹' + totalPipeline.toLocaleString();
+      document.getElementById('wonDealsVal').textContent = '₹' + wonDeals.toLocaleString();
+      document.getElementById('winRateVal').textContent = winRate + '%';
+    }
+
+    window.advanceDeal = function(id) {
+      window.cyberAudio?.playClick();
+      const deal = deals.find(d => d.id === id);
+      if (!deal) return;
+      const currentIdx = stages.findIndex(s => s.id === deal.stage);
+      if (currentIdx < stages.length - 1) {
+        deal.stage = stages[currentIdx + 1].id;
+        renderKanban();
+      }
+    };
+
+    renderKanban();
+  </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnamDelivery — "Swiggy for Flowers" Hyperlocal Marketplace | Aanand AB</title>
+  <meta name="description" content="Full-stack multi-surface delivery platform: Next.js 16 storefront, Flutter Android delivery partner app, Cloudflare Worker + D1 backend, and real-time Leaflet admin dispatcher.">
+  <link rel="stylesheet" href="../assets/css/project-pages.css">
+  <script src="../assets/js/audio-fx.js" defer></script>
+  <style>
+    .calc-slider-box {
+      background: #11110D;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .slider-val {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--acid);
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+      accent-color: var(--acid);
+    }
+    .economics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .econ-card {
+      background: #181813;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+    }
+    .econ-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .econ-num {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .econ-num.green { color: var(--acid); }
+    .econ-num.cyan { color: var(--cyan); }
+    .econ-num.gold { color: var(--gold); }
+
+    /* Architecture Surfaces Grid */
+    .surface-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+    .surface-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .surface-role {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--acid);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+    .surface-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .surface-tech {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cyan);
+      margin-bottom: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="project-header">
+    <a href="../index.html" class="back-link" onclick="window.cyberAudio?.playClick()">← Return to 3D Space</a>
+    <div class="project-brand">◈ AANAND AB // ARCHIVE 03</div>
+    <div class="header-cta-group">
+      <a href="https://github.com/AanandAB/OnamDelivery" target="_blank" rel="noopener" class="btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.78rem;">GitHub Repo ↗</a>
+      <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20want%20to%20build%20a%20hyperlocal%20marketplace%20or%20delivery%20fleet%20app%20like%20OnamDelivery" class="hire-btn-nav" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Hire for This →</a>
+    </div>
+  </header>
+
+  <div class="project-container">
+
+    <!-- Hero Section -->
+    <div class="project-hero">
+      <div class="project-badge-row">
+        <span class="tag-badge">NEXT.JS 16</span>
+        <span class="tag-badge cyan">FLUTTER APK</span>
+        <span class="tag-badge gold">CLOUDFLARE WORKERS + D1</span>
+        <span class="tag-badge">LEAFLET · OSRM ROUTING</span>
+      </div>
+      <h1 class="project-title">OnamDelivery <span>// "Swiggy for Flowers"</span></h1>
+      <p class="project-subtitle">
+        A complete 4-surface on-demand delivery ecosystem operating across Kannur, Kerala: connecting flower merchants to festival celebrants with an autonomous courier fleet, OSRM road routing, and live dispatcher radar.
+      </p>
+      <div class="project-actions-row">
+        <a href="#interactive-demo" class="btn-primary" onclick="window.cyberAudio?.playClick()">Simulate Delivery Economics ↓</a>
+        <a href="https://onam-flowers-shop.pages.dev" target="_blank" rel="noopener" class="btn-secondary">Visit Live Storefront ↗</a>
+      </div>
+    </div>
+
+    <!-- Metrics Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">4 Surfaces</div>
+        <div class="metric-label">Store, Driver APK, API, Admin</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">14 Tables</div>
+        <div class="metric-label">Cloudflare D1 Serverless Schema</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">100% Free</div>
+        <div class="metric-label">OSRM + OSM Open Routing (Zero Google Maps Bills)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">DPDP 2023</div>
+        <div class="metric-label">Compliant Phone-OTP Auth</div>
+      </div>
+    </div>
+
+    <!-- 4 System Surfaces -->
+    <h2 class="section-heading">The 4 Ecosystem Surfaces</h2>
+    <div class="surface-grid">
+      <div class="surface-card">
+        <div class="surface-role">Surface 01 · Customer Web</div>
+        <h3 class="surface-title">Customer Storefront</h3>
+        <div class="surface-tech">Next.js 16 · Tailwind 4 · Cloudflare Pages</div>
+        <p class="feature-desc">
+          Instant static export loading under 400ms. Interactive category pills, location pinning, dynamic gram weight calculations, and COD / UPI intent integration.
+        </p>
+      </div>
+      <div class="surface-card">
+        <div class="surface-role">Surface 02 · Fleet Mobile</div>
+        <h3 class="surface-title">Delivery Partner App</h3>
+        <div class="surface-tech">Flutter 3.47 · Riverpod · OSRM Routing</div>
+        <p class="feature-desc">
+          Native Android APK for drivers. Proximity-based order broadcasts with 45s acceptance timer, turn-by-turn OSRM map routing, and WhatsApp OTP customer verification.
+        </p>
+      </div>
+      <div class="surface-card">
+        <div class="surface-role">Surface 03 · Serverless Core</div>
+        <h3 class="surface-title">Cloudflare Worker API</h3>
+        <div class="surface-tech">TypeScript · D1 SQLite · Web Crypto JWT</div>
+        <p class="feature-desc">
+          Single unified edge worker managing 4 roles (Customer, Partner, Vendor, Owner). Handles order state machine, nearest-driver geospatial scoring, and earnings calculation.
+        </p>
+      </div>
+      <div class="surface-card">
+        <div class="surface-role">Surface 04 · Operations</div>
+        <h3 class="surface-title">Live Dispatcher Console</h3>
+        <div class="surface-tech">Vanilla JS · Leaflet · Chart.js</div>
+        <p class="feature-desc">
+          Real-time map tracking all active drivers, order volume heatmaps, vendor payout reconciliation, and emergency order reassignment tools.
+        </p>
+      </div>
+    </div>
+
+    <!-- Interactive Live Widget: Delivery Economics Calculator -->
+    <section id="interactive-demo" class="interactive-widget-section">
+      <div class="widget-header">
+        <div class="widget-title">
+          <span>🛵</span> Live Dynamic Delivery Economics Simulator
+        </div>
+        <div class="live-pill">
+          <span class="live-dot"></span> Dynamic Formula Active
+        </div>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">
+        OnamDelivery uses a battle-tested algorithmic pricing model designed to ensure delivery partners earn substantially more than fuel costs while keeping customer delivery affordable and the platform profitable.
+      </p>
+
+      <div class="calc-slider-box">
+        <div class="slider-row">
+          <span style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted);">ONE-WAY DELIVERY DISTANCE:</span>
+          <span class="slider-val"><span id="distVal">6.5</span> km</span>
+        </div>
+        <input type="range" id="distSlider" min="1" max="25" step="0.5" value="6.5" oninput="calculateEconomics()">
+      </div>
+
+      <div class="economics-grid">
+        <div class="econ-card">
+          <div class="econ-label">Customer Delivery Fee</div>
+          <div class="econ-num" id="custFee">₹138</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.3rem;">Base ₹40 + ₹15/km</div>
+        </div>
+        <div class="econ-card">
+          <div class="econ-label">Driver Payout</div>
+          <div class="econ-num green" id="driverPay">₹95</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.3rem;">Base ₹30 + ₹10/km</div>
+        </div>
+        <div class="econ-card">
+          <div class="econ-label">Est. Fuel Cost</div>
+          <div class="econ-num" style="color:#ff6b6b;" id="fuelCost">₹38</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.3rem;">₹5.80 / km (2-way)</div>
+        </div>
+        <div class="econ-card">
+          <div class="econ-label">Driver Net Profit</div>
+          <div class="econ-num cyan" id="driverNet">₹57</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.3rem;">Net take-home for trip</div>
+        </div>
+        <div class="econ-card">
+          <div class="econ-label">Platform Margin</div>
+          <div class="econ-num gold" id="platMargin">₹43</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.3rem;">Retained gross revenue</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dispatch Architecture Diagram -->
+    <h2 class="section-heading">How Autonomous Driver Assignment Works</h2>
+    <div class="code-block">
+<span class="comment">// 1. Customer places order on Next.js Storefront</span>
+<span class="keyword">const</span> order = <span class="keyword">await</span> api.createOrder({ items, deliveryLocation });
+
+<span class="comment">// 2. Cloudflare Worker runs spatial query on active drivers</span>
+<span class="keyword">const</span> candidates = <span class="keyword">await</span> db.prepare(`
+  SELECT partner_id, lat, lng, 
+    (6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lng) - radians(?)) + sin(radians(?)) * sin(radians(lat)))) AS dist_km
+  FROM driver_sessions 
+  WHERE is_online = 1 AND is_busy = 0 
+  ORDER BY dist_km ASC LIMIT 3
+`).bind(storeLat, storeLng, storeLat).all();
+
+<span class="comment">// 3. Pushes broadcast with 45s acceptance deadline to nearest driver APK</span>
+<span class="func">dispatchBroadcastOffer</span>(candidates[0].partner_id, order.id, 45);
+    </div>
+
+    <!-- Client CTA Section -->
+    <div class="client-pitch-card">
+      <h2 class="client-pitch-title">Planning an On-Demand Marketplace or Delivery System?</h2>
+      <p class="client-pitch-text">
+        From multi-vendor e-commerce and driver logistics to custom dispatch dashboards and WhatsApp integrations, I build full-stack marketplaces that work reliably under peak load.
+      </p>
+      <div class="pitch-btn-group">
+        <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20saw%20OnamDelivery%20and%20want%20to%20build%20a%20marketplace%20or%20fleet%20app" class="btn-primary" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Discuss Marketplace on WhatsApp →</a>
+        <a href="mailto:aanandab44@gmail.com?subject=Hyperlocal%20Marketplace%20Inquiry" class="btn-secondary">Request Architecture Audit</a>
+      </div>
+    </div>
+
+    <!-- Navigation to next project -->
+    <div class="project-nav-bar">
+      <a href="omnigraph.html" class="nav-prev">
+        <span class="nav-direction">Previous Project</span>
+        <span class="nav-target-name">← OmniGraph (DAG Engine)</span>
+      </a>
+      <a href="onapoo.html" class="nav-next" style="text-align:right;">
+        <span class="nav-direction">Next Project</span>
+        <span class="nav-target-name">Onapoo (Flower Store) →</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    function calculateEconomics() {
+      const dist = parseFloat(document.getElementById('distSlider').value);
+      document.getElementById('distVal').textContent = dist.toFixed(1);
+
+      // Formulas from OnamDelivery settings
+      const customerFee = Math.round(40 + (dist * 15));
+      const driverPayout = Math.round(30 + (dist * 10));
+      const fuelCost = Math.round(dist * 2 * 5.80); // roundtrip fuel
+      const driverNet = Math.max(0, driverPayout - fuelCost);
+      const platformMargin = customerFee - driverPayout;
+
+      document.getElementById('custFee').textContent = '₹' + customerFee;
+      document.getElementById('driverPay').textContent = '₹' + driverPayout;
+      document.getElementById('fuelCost').textContent = '₹' + fuelCost;
+      document.getElementById('driverNet').textContent = '₹' + driverNet;
+      document.getElementById('platMargin').textContent = '₹' + platformMargin;
+    }
+    calculateEconomics();
+  </script>
+</body>
+</html>

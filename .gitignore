@@ -1,0 +1,11 @@
+# Local backups
+*.bak
+*.bak2
+
+# Personal notes / private strategy docs (not part of the site)
+Product A.txt
+
+# Orphaned prototype pages (not linked from index.html)
+os.html
+gg.html
+index-v2.html

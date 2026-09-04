@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniGraph — Knowledge Graph & AI Agent DAG Engine | Aanand AB</title>
+  <meta name="description" content="High-performance graph intelligence platform and multi-agent workflow DAG execution engine featuring real-time interactive physics visualization.">
+  <link rel="stylesheet" href="../assets/css/project-pages.css">
+  <script src="../assets/js/audio-fx.js" defer></script>
+  <style>
+    .graph-canvas-container {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: #060604;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    #graphCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: crosshair;
+    }
+    .graph-hud {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(14, 14, 10, 0.85);
+      border: 1px solid var(--border-glow);
+      backdrop-filter: blur(8px);
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--acid);
+      pointer-events: none;
+    }
+    .graph-controls {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .graph-btn {
+      background: rgba(20, 20, 16, 0.9);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.4rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .graph-btn:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="project-header">
+    <a href="../index.html" class="back-link" onclick="window.cyberAudio?.playClick()">← Return to 3D Space</a>
+    <div class="project-brand">◈ AANAND AB // ARCHIVE 02</div>
+    <div class="header-cta-group">
+      <a href="https://github.com/AanandAB/OmniGraph" target="_blank" rel="noopener" class="btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.78rem;">GitHub Repo ↗</a>
+      <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20am%20interested%20in%20building%20an%20AI%20agent%20workflow%20or%20graph%20engine%20like%20OmniGraph" class="hire-btn-nav" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Hire for This →</a>
+    </div>
+  </header>
+
+  <div class="project-container">
+
+    <!-- Hero Section -->
+    <div class="project-hero">
+      <div class="project-badge-row">
+        <span class="tag-badge cyan">KNOWLEDGE GRAPH</span>
+        <span class="tag-badge">AI AGENT DAG ENGINE</span>
+        <span class="tag-badge gold">FORCE-DIRECTED PHYSICS</span>
+        <span class="tag-badge">TYPESCRIPT · CANVAS · WEBGL</span>
+      </div>
+      <h1 class="project-title">OmniGraph <span>// DAG Engine</span></h1>
+      <p class="project-subtitle">
+        An interconnected graph intelligence and deterministic DAG orchestrator — unifying multi-agent task execution, dynamic relationship clustering, and vector-relational retrieval into an interactive spatial topology.
+      </p>
+      <div class="project-actions-row">
+        <a href="#interactive-demo" class="btn-primary" onclick="window.cyberAudio?.playClick()">Interact With Live Neural Graph ↓</a>
+        <a href="https://github.com/AanandAB/OmniGraph" target="_blank" rel="noopener" class="btn-secondary">Inspect Source Code ↗</a>
+      </div>
+    </div>
+
+    <!-- Metrics Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">&lt;2ms</div>
+        <div class="metric-label">Graph Traversal Latency</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">60 FPS</div>
+        <div class="metric-label">Force Physics Simulation</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">Zero-Cycle</div>
+        <div class="metric-label">Topological DAG Validation</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">Hybrid</div>
+        <div class="metric-label">Vector + Entity Knowledge Links</div>
+      </div>
+    </div>
+
+    <!-- Interactive Live Widget: Interactive Force Graph -->
+    <section id="interactive-demo" class="interactive-widget-section">
+      <div class="widget-header">
+        <div class="widget-title">
+          <span>🕸️</span> Live Agent DAG &amp; Entity Cluster Canvas
+        </div>
+        <div class="live-pill">
+          <span class="live-dot"></span> Interactive Physics Active
+        </div>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">
+        Click and drag nodes to test the real-time velocity and spring damping equations. Use <strong>"Add Agent Node"</strong> to spawn dynamic sub-nodes, or <strong>"Pulse Signal"</strong> to simulate an agent data packet cascading through the graph.
+      </p>
+
+      <div class="graph-canvas-container">
+        <div class="graph-hud" id="graphHud">NODES: 8 · EDGES: 11 · SIMULATION: RUNNING</div>
+        <canvas id="graphCanvas"></canvas>
+        <div class="graph-controls">
+          <button class="graph-btn" onclick="addRandomNode()">+ Add Agent Node</button>
+          <button class="graph-btn" onclick="pulseGraph()">⚡ Pulse Signal</button>
+          <button class="graph-btn" onclick="resetGraph()">↺ Reset Topology</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Architecture Breakdown -->
+    <h2 class="section-heading">Core System Architecture</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⛓️</div>
+        <h3 class="feature-title">Topological DAG Orchestration</h3>
+        <p class="feature-desc">
+          Evaluates multi-agent tasks as a Directed Acyclic Graph. Prevents circular dependencies through cycle-detection algorithms (Tarjan's strongly connected components) and dispatches parallel branches concurrently.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3 class="feature-title">Entity Clustering &amp; Knowledge Triples</h3>
+        <p class="feature-desc">
+          Indexes concepts as Subject-Predicate-Object triples with vector embedding centroids. Enables multi-hop semantic reasoning across large, unstructured knowledge bases.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Hardware-Accelerated Physics</h3>
+        <p class="feature-desc">
+          Custom Coulomb repulsion and Hooke spring tension engine running directly in 60fps canvas loop with adaptive velocity damping for jitter-free layout stabilization.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3 class="feature-title">Hybrid Vector-Graph Retrieval</h3>
+        <p class="feature-desc">
+          Combines nearest-neighbor cosine similarity with graph distance hops, ensuring AI agents retrieve not only relevant text chunks, but also their connected contextual dependencies.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 class="feature-title">Agent State Machine &amp; Handoffs</h3>
+        <p class="feature-desc">
+          Strict typing guarantees between agent handoffs (e.g. Planner → Extractor → Coder → Verifier) with rollback checkpoints when validation gates fail.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Real-Time Telemetry &amp; Inspection</h3>
+        <p class="feature-desc">
+          Instant node inspection revealing runtime execution latency, token consumption per step, and confidence scoring across each semantic bridge.
+        </p>
+      </div>
+    </div>
+
+    <!-- Technical Specifications Table -->
+    <h2 class="section-heading">Technical Specifications</h2>
+    <table class="tech-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Tech Stack</th>
+          <th>Capabilities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Graph Engine</td>
+          <td>TypeScript 5.x</td>
+          <td>Adjacency list matrix with O(1) edge lookup and Tarjan topological sorter</td>
+        </tr>
+        <tr>
+          <td>Physics Simulation</td>
+          <td>Custom Verlet Integration</td>
+          <td>Quadtree spatial indexing for N-body Coulomb repulsion</td>
+        </tr>
+        <tr>
+          <td>Visualization</td>
+          <td>HTML5 Canvas 2D / WebGL</td>
+          <td>Anti-aliased glow shaders, spring curves, and high-DPI retina rendering</td>
+        </tr>
+        <tr>
+          <td>Data Schema</td>
+          <td>JSON-LD / Cypher compliant</td>
+          <td>Compatible with Neo4j, LangGraph, and standard RDF triple stores</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Client CTA Section -->
+    <div class="client-pitch-card">
+      <h2 class="client-pitch-title">Building an Agent Workflow or Data Visualization Platform?</h2>
+      <p class="client-pitch-text">
+        I architect complex data systems, custom AI agent DAG pipelines, and interactive 2D/3D visual dashboards tailored to enterprise workloads.
+      </p>
+      <div class="pitch-btn-group">
+        <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20am%20interested%20in%20your%20OmniGraph%20engine%20and%20want%20to%20discuss%20an%20AI%20or%20graph%20project" class="btn-primary" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Discuss Graph Architecture on WhatsApp →</a>
+        <a href="mailto:aanandab44@gmail.com?subject=Inquiry%20-%20Graph%20Engine%20Project" class="btn-secondary">Email Consultation</a>
+      </div>
+    </div>
+
+    <!-- Navigation to next project -->
+    <div class="project-nav-bar">
+      <a href="leadtoclose.html" class="nav-prev">
+        <span class="nav-direction">Previous Project</span>
+        <span class="nav-target-name">← LeadtoClose (Freelance Hub)</span>
+      </a>
+      <a href="onamdelivery.html" class="nav-next" style="text-align:right;">
+        <span class="nav-direction">Next Project</span>
+        <span class="nav-target-name">OnamDelivery (Marketplace) →</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // Interactive Force-Directed Canvas Simulation
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    const hud = document.getElementById('graphHud');
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.height = rect.height * (window.devicePixelRatio || 1);
+      ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let nodes = [];
+    let edges = [];
+    let draggedNode = null;
+    let pulseProgress = 0;
+    let isPulsing = false;
+
+    function initGraph() {
+      const w = canvas.parentElement.clientWidth;
+      const h = canvas.parentElement.clientHeight;
+
+      nodes = [
+        { id: 'master', label: 'Orchestrator', x: w*0.5, y: h*0.5, vx: 0, vy: 0, color: '#CAFF00', r: 16, type: 'core' },
+        { id: 'plan', label: 'Planner Agent', x: w*0.35, y: h*0.3, vx: 0, vy: 0, color: '#00F0FF', r: 12, type: 'agent' },
+        { id: 'research', label: 'Knowledge Graph', x: w*0.65, y: h*0.3, vx: 0, vy: 0, color: '#FF007F', r: 12, type: 'kg' },
+        { id: 'vector', label: 'Vector Index', x: w*0.75, y: h*0.45, vx: 0, vy: 0, color: '#FFB703', r: 10, type: 'data' },
+        { id: 'coder', label: 'Code Synthesizer', x: w*0.3, y: h*0.65, vx: 0, vy: 0, color: '#00F0FF', r: 12, type: 'agent' },
+        { id: 'verify', label: 'Quality Auditor', x: w*0.5, y: h*0.75, vx: 0, vy: 0, color: '#CAFF00', r: 12, type: 'agent' },
+        { id: 'deploy', label: 'CI/CD Gate', x: w*0.7, y: h*0.7, vx: 0, vy: 0, color: '#F4F1E8', r: 10, type: 'tool' },
+        { id: 'db', label: 'D1 State Store', x: w*0.2, y: h*0.45, vx: 0, vy: 0, color: '#FFB703', r: 10, type: 'data' }
+      ];
+
+      edges = [
+        ['master', 'plan'],
+        ['master', 'research'],
+        ['plan', 'coder'],
+        ['research', 'vector'],
+        ['research', 'master'],
+        ['coder', 'verify'],
+        ['verify', 'deploy'],
+        ['plan', 'db'],
+        ['master', 'verify'],
+        ['deploy', 'master']
+      ];
+
+      updateHud();
+    }
+
+    function updateHud() {
+      hud.textContent = `NODES: ${nodes.length} · EDGES: ${edges.length} · GRAPH TYPE: DETERMINISTIC DAG`;
+    }
+
+    // Force Physics Calculations
+    function updatePhysics() {
+      const w = canvas.parentElement.clientWidth;
+      const h = canvas.parentElement.clientHeight;
+
+      // Coulomb Repulsion
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[j].x - nodes[i].x;
+          const dy = nodes[j].y - nodes[i].y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          const force = 1800 / (dist * dist);
+          const fx = (dx / dist) * force;
+          const fy = (dy / dist) * force;
+
+          if (nodes[i] !== draggedNode) {
+            nodes[i].vx -= fx;
+            nodes[i].vy -= fy;
+          }
+          if (nodes[j] !== draggedNode) {
+            nodes[j].vx += fx;
+            nodes[j].vy += fy;
+          }
+        }
+      }
+
+      // Spring Tension on Edges
+      edges.forEach(([idA, idB]) => {
+        const a = nodes.find(n => n.id === idA);
+        const b = nodes.find(n => n.id === idB);
+        if (!a || !b) return;
+
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        const desiredDist = 110;
+        const force = (dist - desiredDist) * 0.04;
+        const fx = (dx / dist) * force;
+        const fy = (dy / dist) * force;
+
+        if (a !== draggedNode) {
+          a.vx += fx;
+          a.vy += fy;
+        }
+        if (b !== draggedNode) {
+          b.vx -= fx;
+          b.vy -= fy;
+        }
+      });
+
+      // Gravity to Center & Damping
+      nodes.forEach(n => {
+        if (n === draggedNode) return;
+        n.vx += (w * 0.5 - n.x) * 0.003;
+        n.vy += (h * 0.5 - n.y) * 0.003;
+
+        n.vx *= 0.88; // damping
+        n.vy *= 0.88;
+
+        n.x += n.vx;
+        n.y += n.vy;
+
+        // Boundary bounce
+        n.x = Math.max(25, Math.min(w - 25, n.x));
+        n.y = Math.max(25, Math.min(h - 25, n.y));
+      });
+
+      if (isPulsing) {
+        pulseProgress += 0.02;
+        if (pulseProgress > 1) {
+          isPulsing = false;
+          pulseProgress = 0;
+        }
+      }
+    }
+
+    // Render Function
+    function render() {
+      const w = canvas.parentElement.clientWidth;
+      const h = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw Edges
+      edges.forEach(([idA, idB], index) => {
+        const a = nodes.find(n => n.id === idA);
+        const b = nodes.find(n => n.id === idB);
+        if (!a || !b) return;
+
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = 'rgba(244, 241, 232, 0.12)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Draw pulse wave if active
+        if (isPulsing) {
+          const px = a.x + (b.x - a.x) * pulseProgress;
+          const py = a.y + (b.y - a.y) * pulseProgress;
+          ctx.beginPath();
+          ctx.arc(px, py, 3, 0, Math.PI * 2);
+          ctx.fillStyle = '#CAFF00';
+          ctx.shadowColor = '#CAFF00';
+          ctx.shadowBlur = 10;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      });
+
+      // Draw Nodes
+      nodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#10100D';
+        ctx.fill();
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Node Glow Ring
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2);
+        ctx.strokeStyle = n.color + '33';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Label
+        ctx.font = '10px "DM Mono", monospace';
+        ctx.fillStyle = '#F4F1E8';
+        ctx.textAlign = 'center';
+        ctx.fillText(n.label, n.x, n.y + n.r + 14);
+      });
+
+      updatePhysics();
+      requestAnimationFrame(render);
+    }
+
+    // Mouse Interaction for Dragging
+    canvas.addEventListener('mousedown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+
+      draggedNode = nodes.find(n => {
+        const d = Math.hypot(n.x - mx, n.y - my);
+        return d < n.r + 5;
+      });
+      if (draggedNode) window.cyberAudio?.playClick();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!draggedNode) return;
+      const rect = canvas.getBoundingClientRect();
+      draggedNode.x = e.clientX - rect.left;
+      draggedNode.y = e.clientY - rect.top;
+      draggedNode.vx = 0;
+      draggedNode.vy = 0;
+    });
+
+    window.addEventListener('mouseup', () => {
+      draggedNode = null;
+    });
+
+    // Control Handlers
+    window.addRandomNode = function() {
+      window.cyberAudio?.playChirp();
+      const w = canvas.parentElement.clientWidth;
+      const h = canvas.parentElement.clientHeight;
+      const labels = ['Critic Bot', 'Memory Scribe', 'JSON Validator', 'SQL Generator', 'Auth Sentinel', 'Worker Pod'];
+      const randomLabel = labels[Math.floor(Math.random() * labels.length)] + ` #${nodes.length + 1}`;
+      const newId = 'n_' + Date.now();
+      
+      const newNode = {
+        id: newId,
+        label: randomLabel,
+        x: w * 0.5 + (Math.random() - 0.5) * 100,
+        y: h * 0.5 + (Math.random() - 0.5) * 100,
+        vx: (Math.random() - 0.5) * 5,
+        vy: (Math.random() - 0.5) * 5,
+        color: '#00F0FF',
+        r: 10,
+        type: 'agent'
+      };
+
+      nodes.push(newNode);
+      const targetNode = nodes[Math.floor(Math.random() * (nodes.length - 1))];
+      edges.push([targetNode.id, newId]);
+      updateHud();
+    };
+
+    window.pulseGraph = function() {
+      window.cyberAudio?.playChirp();
+      isPulsing = true;
+      pulseProgress = 0;
+    };
+
+    window.resetGraph = function() {
+      window.cyberAudio?.playClick();
+      initGraph();
+    };
+
+    initGraph();
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAH Mess — Campus Dining ERP & Digital Meal Token System | Aanand AB Showcase</title>
+  <meta name="description" content="Hostel & institutional dining management ERP with digital meal tokens, mess-cut rebate algorithms, and attendance verification by Aanand AB.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/project-pages.css">
+  <style>
+    .token-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 850px) {
+      .token-grid { grid-template-columns: 1fr; }
+    }
+    .pass-ticket-card {
+      background: linear-gradient(145deg, #111115, #08080a);
+      border: 1px dashed rgba(202, 255, 0, 0.4);
+      border-radius: 14px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .pass-ticket-card::before, .pass-ticket-card::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: var(--bg-dark);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .pass-ticket-card::before { left: -12px; }
+    .pass-ticket-card::after { right: -12px; }
+    .ticket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .qr-mock {
+      width: 110px;
+      height: 110px;
+      background: #fff;
+      padding: 6px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .qr-mock svg {
+      width: 100%;
+      height: 100%;
+    }
+    .rebate-calculator {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .token-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 0.6rem;
+    }
+    .token-row .k { color: var(--text-dim); }
+    .token-row .v { font-family: var(--font-mono); color: #fff; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- Glow Orbs -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="project-header">
+    <a href="../index.html" class="back-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Aanand AB / Showcase
+    </a>
+    <div style="display: flex; gap: 0.75rem; align-items: center;">
+      <button class="sound-toggle" id="soundToggle" aria-label="Toggle Sound Effects">FX: OFF</button>
+      <a href="https://github.com/AanandAB/JAH_Mess" target="_blank" rel="noopener" class="btn-cta btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+        GitHub Repo ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="project-container">
+    <section class="hero-section">
+      <div class="project-badge">
+        <span class="badge-dot"></span>
+        <span>Campus Dining ERP & Digital Meal Token Engine</span>
+      </div>
+      <h1 class="project-title">JAH MESS</h1>
+      <p class="project-tagline">
+        Eliminating Food Waste & Cash Leaks in Institutional Dining. An end-to-end mess management system with dynamic digital token verification, transparent mess-cut rebate math, and kitchen demand forecasting.
+      </p>
+
+      <div class="project-meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Client Domain</div>
+          <div class="meta-val">Hostels, Universities & Institutional Dining Halls</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Core Modules</div>
+          <div class="meta-val">Digital Meal Passes, Mess-Cut Auto-Rebate, Kitchen Inventory</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Waste Reduction Impact</div>
+          <div class="meta-val">~28% Reduction in Prepared Food Surplus</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Accountability</div>
+          <div class="meta-val">Zero Phantom Diners via QR Token Handshakes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Simulator: Digital Token & Mess Cut Rebate Engine -->
+    <section class="interactive-panel">
+      <div class="interactive-badge">
+        <span class="pulse-dot"></span>
+        <span>Interactive Token & Financial Simulator</span>
+      </div>
+      <h2 class="panel-title">Digital Meal Token & Automated Mess-Cut Rebate Engine</h2>
+      <p class="panel-desc">
+        Try the student-facing portal below: configure a student's monthly meal plan, apply absent days (Mess Cut), and generate an anti-counterfeit QR dining pass in real time:
+      </p>
+
+      <div class="token-grid">
+        <!-- Rebate Configurator -->
+        <div class="rebate-calculator">
+          <h3 style="font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--acid-lime);">
+            Student Meal Plan & Absence Parameters
+          </h3>
+
+          <div style="margin-bottom: 1.25rem;">
+            <label style="display: block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.5rem;">
+              Select Dining Tier:
+            </label>
+            <select id="planSelect" class="form-input" style="background: rgba(0,0,0,0.7); cursor: pointer;">
+              <option value="full">Full Board (Breakfast + Lunch + Dinner) — ₹4,200/mo</option>
+              <option value="lunch_dinner">Lunch & Dinner Only — ₹3,200/mo</option>
+              <option value="dinner_only">Dinner Only Pass — ₹1,800/mo</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 0.5rem;">
+              <span style="color: var(--text-dim);">Mess-Cut Days (Approved Leave):</span>
+              <span id="leaveDaysDisplay" style="color: var(--electric-cyan); font-weight: 700;">4 Days</span>
+            </div>
+            <input type="range" id="leaveDaysSlider" min="0" max="15" value="4" style="width: 100%; accent-color: var(--electric-cyan); cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono);">
+              <span>0 Days (Full Billing)</span>
+              <span>Max Allowable: 15 Days</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.5rem;">
+              Student ID / Room Number:
+            </label>
+            <input type="text" id="studentIdInput" value="JAH-B3-204" class="form-input" style="background: rgba(0,0,0,0.7);">
+          </div>
+
+          <button id="generateTokenBtn" class="btn-cta btn-primary" style="width: 100%; justify-content: center;">
+            Generate Live Digital Dining Token
+          </button>
+        </div>
+
+        <!-- Generated Pass Card Preview -->
+        <div class="pass-ticket-card">
+          <div class="ticket-header">
+            <div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: #fff;">JAH HOSTEL DINING</div>
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--acid-lime);">AUTHENTICATED MEAL TOKEN</div>
+            </div>
+            <div id="tokenCode" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--electric-cyan); font-weight: 700;">
+              #TK-8821
+            </div>
+          </div>
+
+          <!-- Stylized QR Code Mock -->
+          <div class="qr-mock">
+            <svg viewBox="0 0 100 100" fill="#000">
+              <rect x="10" y="10" width="25" height="25" fill="#000"/>
+              <rect x="15" y="15" width="15" height="15" fill="#fff"/>
+              <rect x="18" y="18" width="9" height="9" fill="#000"/>
+              <rect x="65" y="10" width="25" height="25" fill="#000"/>
+              <rect x="70" y="15" width="15" height="15" fill="#fff"/>
+              <rect x="73" y="18" width="9" height="9" fill="#000"/>
+              <rect x="10" y="65" width="25" height="25" fill="#000"/>
+              <rect x="15" y="70" width="15" height="15" fill="#fff"/>
+              <rect x="18" y="73" width="9" height="9" fill="#000"/>
+              <rect x="45" y="15" width="10" height="10" fill="#000"/>
+              <rect x="45" y="45" width="10" height="10" fill="#000"/>
+              <rect x="25" y="45" width="10" height="10" fill="#000"/>
+              <rect x="65" y="45" width="10" height="10" fill="#000"/>
+              <rect x="45" y="75" width="10" height="10" fill="#000"/>
+              <rect x="75" y="75" width="10" height="10" fill="#000"/>
+            </svg>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 1.25rem;">
+            <div id="displayMealTime" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--acid-lime); font-weight: 700;">
+              LUNCH SESSION (12:30 PM – 02:30 PM)
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono);">
+              Auto-refreshes security nonce every 60 seconds
+            </div>
+          </div>
+
+          <div class="token-row">
+            <span class="k">Student ID:</span>
+            <span class="v" id="cardStudentId">JAH-B3-204</span>
+          </div>
+          <div class="token-row">
+            <span class="k">Base Plan:</span>
+            <span class="v" id="cardBasePlan">₹4,200</span>
+          </div>
+          <div class="token-row">
+            <span class="k">Mess Cut Rebate (4 days):</span>
+            <span class="v" id="cardRebate" style="color: var(--acid-lime);">-₹560</span>
+          </div>
+          <div class="token-row" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem; margin-top: 0.75rem;">
+            <span class="k" style="color: #fff; font-weight: 700;">Net Monthly Dues:</span>
+            <span class="v" id="cardNetTotal" style="font-size: 1.15rem; color: var(--electric-cyan);">₹3,640</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Architectural Breakdown -->
+    <section class="deep-dive-grid">
+      <div class="narrative-block">
+        <h3>The Problem: Chaos, Food Wastage, and Reconciliation Nightmares</h3>
+        <p>
+          University hostels and community dining messes traditionally rely on paper coupons or manual ledger books. This leads to rampant systemic breakdowns:
+        </p>
+        <ul class="feature-list">
+          <li>
+            <strong>Counterfeited and Passed Coupons:</strong> Paper slips are shared among non-paying guests, resulting in budget deficits.
+          </li>
+          <li>
+            <strong>Blind Kitchen Prep:</strong> Chefs have zero foresight into how many students will eat on any given evening, resulting in tens of kilograms of untouched food dumped into waste bins nightly.
+          </li>
+          <li>
+            <strong>Mess-Cut Calculation Disputes:</strong> Calculating pro-rated daily food cuts manually for hundreds of residents causes bitter administrative friction every billing cycle.
+          </li>
+        </ul>
+
+        <h3 style="margin-top: 2rem;">The Engineering Solution</h3>
+        <p>
+          JAH Mess transforms the operation into an automated, transparent, high-efficiency machine:
+        </p>
+        <ul class="feature-list">
+          <li>
+            <strong>Cryptographically Nonced Tokens:</strong> Student smartphone passes generate rotating time-sensitive QR signatures preventing screenshots or resale.
+          </li>
+          <li>
+            <strong>Kitchen Demand Dashboard:</strong> Cooks see exact forecasted dining headcounts 4 hours in advance based on registered meal cuts, curbing raw ingredient over-preparation.
+          </li>
+          <li>
+            <strong>Automated Billing & Ledger:</strong> Pro-rated rebate credits are automatically credited to the student ledger when leave requests are pre-approved.
+          </li>
+        </ul>
+      </div>
+
+      <div class="tech-spec-box">
+        <h3>System Architecture & Metrics</h3>
+        <div class="spec-row">
+          <span class="spec-name">Application Core</span>
+          <span class="spec-val">Flutter & Web Dashboard</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-name">Token Authentication</span>
+          <span class="spec-val">Dynamic TOTP QR Code Verification</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-name">Database Engine</span>
+          <span class="spec-val">Relational PostgreSQL + Real-Time Sync</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-name">Diner Throughput</span>
+          <span class="spec-val">&lt; 1.2s per Student Counter Scan</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-name">Food Waste Saved</span>
+          <span class="spec-val">Average 28% Daily Surplus Drop</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-name">Billing Disputes</span>
+          <span class="spec-val">Reduced by 94%</span>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(202, 255, 0, 0.05); border: 1px solid rgba(202, 255, 0, 0.2); border-radius: 8px;">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--acid-lime); margin-bottom: 0.5rem; font-weight: 600;">
+            AANAND'S CLIENT VALUE
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.6;">
+            Institutions save tens of thousands in grocery over-purchasing while gaining complete peace of mind with verifiable student accounting.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conversion Banner -->
+    <section class="conversion-banner">
+      <h2>Managing a Campus, Hostel, or Institution Dining Hall?</h2>
+      <p>
+        Let's deploy a customized digital dining token & inventory ERP tailored to your facility. Clean, intuitive, and loved by both students and kitchen staff.
+      </p>
+      <div class="cta-actions">
+        <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20reviewed%20your%20JAH%20Mess%20system%20and%20want%20to%20discuss%20an%20institutional%20ERP." target="_blank" rel="noopener" class="btn-cta btn-primary">
+          Chat on WhatsApp: +91 70340 26295
+        </a>
+        <a href="mailto:aanandab44@gmail.com?subject=Institutional%20Dining%20ERP%20Inquiry" class="btn-cta btn-secondary">
+          Email: aanandab44@gmail.com
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/audio-fx.js"></script>
+  <script>
+    const planSelect = document.getElementById('planSelect');
+    const leaveSlider = document.getElementById('leaveDaysSlider');
+    const leaveDaysDisplay = document.getElementById('leaveDaysDisplay');
+    const studentIdInput = document.getElementById('studentIdInput');
+    const generateTokenBtn = document.getElementById('generateTokenBtn');
+
+    const cardStudentId = document.getElementById('cardStudentId');
+    const cardBasePlan = document.getElementById('cardBasePlan');
+    const cardRebate = document.getElementById('cardRebate');
+    const cardNetTotal = document.getElementById('cardNetTotal');
+    const tokenCode = document.getElementById('tokenCode');
+
+    const PLAN_COSTS = {
+      full: 4200,
+      lunch_dinner: 3200,
+      dinner_only: 1800
+    };
+
+    function updateRebateCalculation() {
+      const planKey = planSelect.value;
+      const baseFee = PLAN_COSTS[planKey];
+      const leaveDays = parseInt(leaveSlider.value, 10);
+      leaveDaysDisplay.textContent = `${leaveDays} Day${leaveDays === 1 ? '' : 's'}`;
+
+      const dailyRate = Math.round(baseFee / 30);
+      const rebate = dailyRate * leaveDays;
+      const netFee = Math.max(0, baseFee - rebate);
+
+      cardStudentId.textContent = studentIdInput.value || 'GUEST-01';
+      cardBasePlan.textContent = `₹${baseFee.toLocaleString()}`;
+      cardRebate.textContent = `-₹${rebate.toLocaleString()}`;
+      cardNetTotal.textContent = `₹${netFee.toLocaleString()}`;
+    }
+
+    planSelect.addEventListener('change', () => {
+      updateRebateCalculation();
+      if (window.soundFX) window.soundFX.playBeep();
+    });
+
+    leaveSlider.addEventListener('input', () => {
+      updateRebateCalculation();
+    });
+
+    studentIdInput.addEventListener('input', () => {
+      cardStudentId.textContent = studentIdInput.value || 'GUEST-01';
+    });
+
+    generateTokenBtn.addEventListener('click', () => {
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      tokenCode.textContent = `#TK-${rand}`;
+      tokenCode.style.color = 'var(--acid-lime)';
+      setTimeout(() => {
+        tokenCode.style.color = 'var(--electric-cyan)';
+      }, 500);
+
+      if (window.soundFX) window.soundFX.playSuccess();
+    });
+
+    updateRebateCalculation();
+  </script>
+</body>
+</html>

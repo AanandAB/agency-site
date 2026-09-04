@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onapookkal (Onapoo) — Bilingual E-Commerce & Flower Logistics | Aanand AB</title>
+  <meta name="description" content="High-conversion seasonal e-commerce platform with real-time 2-way gram↔rupee budget calculator, server-validated Haversine delivery radius, and bilingual Malayalam support.">
+  <link rel="stylesheet" href="../assets/css/project-pages.css">
+  <script src="../assets/js/audio-fx.js" defer></script>
+  <style>
+    .flower-calc-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .flower-calc-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .flower-picker {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .flower-chip {
+      background: #12120e;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .flower-chip.active {
+      border-color: #FF3366;
+      background: rgba(255, 51, 102, 0.1);
+    }
+    .flower-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .flower-price {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--acid);
+    }
+    .calc-input-box {
+      background: #141410;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .calc-input-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .calc-input-field {
+      width: 100%;
+      background: #080806;
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 0.6rem 0.8rem;
+      color: var(--acid);
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      outline: none;
+    }
+    .calc-input-field:focus {
+      border-color: var(--acid);
+    }
+    .whatsapp-preview-box {
+      background: #081a12;
+      border: 1px solid #1f5139;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #92e6b9;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .lang-toggle-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .lang-toggle-btn.active {
+      border-color: var(--acid);
+      color: var(--acid);
+      background: rgba(202, 255, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="project-header">
+    <a href="../index.html" class="back-link" onclick="window.cyberAudio?.playClick()">← Return to 3D Space</a>
+    <div class="project-brand">◈ AANAND AB // ARCHIVE 04</div>
+    <div class="header-cta-group">
+      <a href="https://github.com/AanandAB/Onapoo" target="_blank" rel="noopener" class="btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.78rem;">GitHub Repo ↗</a>
+      <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20love%20the%20Onapookkal%20store%20and%20want%20to%20build%20an%20e-commerce%20website" class="hire-btn-nav" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Hire for This →</a>
+    </div>
+  </header>
+
+  <div class="project-container">
+
+    <!-- Hero Section -->
+    <div class="project-hero">
+      <div class="project-badge-row">
+        <span class="tag-badge magenta">E-COMMERCE</span>
+        <span class="tag-badge">NEXT.JS · DRIZZLE ORM</span>
+        <span class="tag-badge cyan">CLOUDFLARE D1</span>
+        <span class="tag-badge gold">ENGLISH + മലയാളം</span>
+      </div>
+      <h1 class="project-title">Onapookkal <span>(Onapoo)</span></h1>
+      <p class="project-subtitle">
+        A high-velocity, seasonal flower e-commerce platform built for the Onam festival in Kannur, Kerala. Featuring an interactive 2-way gram↔rupee budget engine, server-side Haversine delivery charges, and direct WhatsApp checkout.
+      </p>
+      <div class="project-actions-row">
+        <a href="#interactive-demo" class="btn-primary" onclick="window.cyberAudio?.playClick()">Try 2-Way Budget Engine ↓</a>
+        <a href="https://onapookkal.store" target="_blank" rel="noopener" class="btn-secondary">View Live Storefront ↗</a>
+      </div>
+    </div>
+
+    <!-- Metrics Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">2-Way</div>
+        <div class="metric-label">Live Gram ↔ Rupee Calculator</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">Haversine</div>
+        <div class="metric-label">Server-Validated GPS Radius</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">100%</div>
+        <div class="metric-label">Bilingual (English + മലയാളം)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0% Fraud</div>
+        <div class="metric-label">Server-Side Price Re-Validation</div>
+      </div>
+    </div>
+
+    <!-- Interactive Live Widget: 2-Way Budget Engine -->
+    <section id="interactive-demo" class="interactive-widget-section">
+      <div class="widget-header">
+        <div class="widget-title">
+          <span>🌸</span> Live Dynamic Flower Budget &amp; WhatsApp Order Engine
+        </div>
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <button class="lang-toggle-btn active" id="btnEn" onclick="switchLang('en')">English</button>
+          <button class="lang-toggle-btn" id="btnMl" onclick="switchLang('ml')">മലയാളം</button>
+        </div>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;" id="calcIntro">
+        Select a festival flower variety. Enter either how many grams you need OR how much rupees you want to spend — the engine dynamically computes the exact quantity, calculates the Haversine delivery fee from Kannur, and prepares the WhatsApp checkout payload.
+      </p>
+
+      <div class="flower-calc-container">
+        <!-- Input Column -->
+        <div>
+          <span class="calc-input-label" id="labelSelectFlower">SELECT FLOWER VARIETY:</span>
+          <div class="flower-picker">
+            <div class="flower-chip active" onclick="selectFlower('Chethi', 360, this)">
+              <span class="flower-name" id="f1Name">Chethi (ചെത്തി)</span>
+              <span class="flower-price">₹360/kg</span>
+            </div>
+            <div class="flower-chip" onclick="selectFlower('Marigold (Yellow)', 240, this)">
+              <span class="flower-name" id="f2Name">Marigold (മഞ്ഞ ജമന്തി)</span>
+              <span class="flower-price">₹240/kg</span>
+            </div>
+            <div class="flower-chip" onclick="selectFlower('Vadamalli', 400, this)">
+              <span class="flower-name" id="f3Name">Vadamalli (വാടാമല്ലി)</span>
+              <span class="flower-price">₹400/kg</span>
+            </div>
+            <div class="flower-chip" onclick="selectFlower('Arali', 320, this)">
+              <span class="flower-name" id="f4Name">Arali (അരളി)</span>
+              <span class="flower-price">₹320/kg</span>
+            </div>
+          </div>
+
+          <div class="calc-input-box">
+            <span class="calc-input-label" id="labelGrams">OPTION A: ENTER GRAMS (ഭാരം):</span>
+            <input type="number" id="inputGrams" class="calc-input-field" value="500" min="50" step="50" oninput="onGramsChange()">
+          </div>
+
+          <div class="calc-input-box">
+            <span class="calc-input-label" id="labelRupees">OPTION B: SPEND BUDGET ₹ (തുക):</span>
+            <input type="number" id="inputRupees" class="calc-input-field" value="180" min="20" step="10" oninput="onRupeesChange()">
+          </div>
+
+          <div class="calc-input-box">
+            <span class="calc-input-label" id="labelDelivery">DELIVERY DISTANCE (കണ്ണൂർ ടൗണിൽ നിന്ന്):</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+              <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);"><span id="kmLabel">4.0</span> km from Hub</span>
+              <span style="font-family:var(--font-mono); font-size:0.85rem; color:var(--acid); font-weight:700;" id="deliveryCharge">FREE (&le; 7 km)</span>
+            </div>
+            <input type="range" id="radiusSlider" min="1" max="20" step="0.5" value="4" oninput="onDistanceChange()">
+          </div>
+        </div>
+
+        <!-- Output Column: Live WhatsApp Payload -->
+        <div>
+          <span class="calc-input-label" id="labelSummary">REAL-TIME ORDER BREAKDOWN &amp; WHATSAPP PIPE:</span>
+          <div class="whatsapp-preview-box" id="waPreview">
+            <!-- Dynamically populated -->
+          </div>
+          <button class="btn-primary" style="width:100%; margin-top:1rem; justify-content:center;" onclick="testWhatsAppOrder()">
+            Test WhatsApp Order Trigger →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Architecture Features -->
+    <h2 class="section-heading">Key Engineering Highlights</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3 class="feature-title">Haversine Spatial Verification</h3>
+        <p class="feature-desc">
+          Computes true spherical distance from store origin coordinates (`11.8314722, 75.5517778`). Delivery is free under 7 km or for orders exceeding ₹2,000. All distances and cart values are strictly re-verified on the server side to eliminate tampering.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3 class="feature-title">Complete Bilingual Localization</h3>
+        <p class="feature-desc">
+          Full English and Malayalam translation layer persisted in localStorage. Every product title, colour tag, banner notification, and checkout receipt switches seamlessly without page reload.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <h3 class="feature-title">WhatsApp Order Stream</h3>
+        <p class="feature-desc">
+          Instant order creation: saving order details to Cloudflare D1 while simultaneously piping formatted order confirmations directly to WhatsApp with phone verification and live tracking links (`/track`).
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h3 class="feature-title">GSAP &amp; Lenis Motion Choreography</h3>
+        <p class="feature-desc">
+          Smooth anchor-aware Lenis scrolling with rotating pookalam floral motifs, countdown timer to Thiruvonam, and micro-interactions optimized for high conversion.
+        </p>
+      </div>
+    </div>
+
+    <!-- Client CTA Section -->
+    <div class="client-pitch-card">
+      <h2 class="client-pitch-title">Want a High-Converting E-Commerce Site with WhatsApp Integration?</h2>
+      <p class="client-pitch-text">
+        I build fast, beautiful, and localized e-commerce websites that convert visitors directly into paying customers through online gateways or direct WhatsApp messaging.
+      </p>
+      <div class="pitch-btn-group">
+        <a href="https://wa.me/917034026295?text=Hi%20Aanand,%20I%20want%20to%20build%20an%20e-commerce%20website%20like%20Onapookkal" class="btn-primary" target="_blank" rel="noopener" onclick="window.cyberAudio?.playClick()">Discuss Your Store on WhatsApp →</a>
+        <a href="mailto:aanandab44@gmail.com?subject=E-Commerce%20Website%20Inquiry" class="btn-secondary">Request Custom Quote</a>
+      </div>
+    </div>
+
+    <!-- Navigation to next project -->
+    <div class="project-nav-bar">
+      <a href="onamdelivery.html" class="nav-prev">
+        <span class="nav-direction">Previous Project</span>
+        <span class="nav-target-name">← OnamDelivery (Marketplace)</span>
+      </a>
+      <a href="aquarium.html" class="nav-next" style="text-align:right;">
+        <span class="nav-direction">Next Project</span>
+        <span class="nav-target-name">Happy Aquarium (Store &amp; CMS) →</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    let currentFlower = 'Chethi';
+    let currentPricePerKg = 360;
+    let currentLang = 'en';
+
+    function selectFlower(name, price, el) {
+      window.cyberAudio?.playClick();
+      currentFlower = name;
+      currentPricePerKg = price;
+      document.querySelectorAll('.flower-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      onGramsChange();
+    }
+
+    function onGramsChange() {
+      const grams = parseFloat(document.getElementById('inputGrams').value) || 0;
+      const rupees = Math.round((grams / 1000) * currentPricePerKg);
+      document.getElementById('inputRupees').value = rupees;
+      updateBreakdown(grams, rupees);
+    }
+
+    function onRupeesChange() {
+      const rupees = parseFloat(document.getElementById('inputRupees').value) || 0;
+      const grams = Math.round((rupees / currentPricePerKg) * 1000);
+      document.getElementById('inputGrams').value = grams;
+      updateBreakdown(grams, rupees);
+    }
+
+    function onDistanceChange() {
+      const km = parseFloat(document.getElementById('radiusSlider').value);
+      document.getElementById('kmLabel').textContent = km.toFixed(1);
+      
+      let deliveryFee = 0;
+      if (km <= 7) {
+        deliveryFee = 0;
+        document.getElementById('deliveryCharge').textContent = 'FREE (≤ 7 km)';
+      } else {
+        deliveryFee = Math.round(20 + (km - 7) * 5);
+        document.getElementById('deliveryCharge').textContent = '₹' + deliveryFee;
+      }
+
+      const grams = parseFloat(document.getElementById('inputGrams').value) || 0;
+      const rupees = parseFloat(document.getElementById('inputRupees').value) || 0;
+      updateBreakdown(grams, rupees, deliveryFee);
+    }
+
+    function updateBreakdown(grams, rupees, feeOverride) {
+      const km = parseFloat(document.getElementById('radiusSlider').value);
+      const deliveryFee = feeOverride !== undefined ? feeOverride : (km <= 7 ? 0 : Math.round(20 + (km - 7) * 5));
+      const total = rupees + deliveryFee;
+
+      const preview = `📦 ONAPOOKKAL ORDER SUMMARY
+────────────────────────────
+🌸 Flower: ${currentFlower}
+⚖️ Quantity: ${grams} grams (${(grams/1000).toFixed(2)} kg)
+💵 Flower Total: ₹${rupees}
+🛵 Delivery Distance: ${km} km (${deliveryFee === 0 ? 'FREE DELIVERY' : '₹' + deliveryFee})
+────────────────────────────
+TOTAL PAYABLE: ₹${total}
+Payment Method: Cash On Delivery / UPI
+Store: Kuthuparamba, Kannur
+Status: Ready for WhatsApp dispatch`;
+
+      document.getElementById('waPreview').textContent = preview;
+    }
+
+    function testWhatsAppOrder() {
+      window.cyberAudio?.playChirp();
+      alert('Simulating WhatsApp trigger! In production, this directly opens WhatsApp with the formatted order text sent to the merchant.');
+    }
+
+    function switchLang(lang) {
+      window.cyberAudio?.playClick();
+      currentLang = lang;
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+      document.getElementById('btnMl').classList.toggle('active', lang === 'ml');
+
+      if (lang === 'ml') {
+        document.getElementById('calcIntro').textContent = 'പൂക്കളുടെ ഇനം തിരഞ്ഞെടുക്കുക. ആവശ്യമുള്ള ഗ്രാം അല്ലെങ്കിൽ നിങ്ങളുടെ ബജറ്റ് നൽകുക. തുക കൃത്യമായി കണക്കാക്കുകയും വാട്ട്സ്ആപ്പ് ഓർഡർ തയ്യാറാക്കുകയും ചെയ്യും.';
+        document.getElementById('labelSelectFlower').textContent = 'പൂക്കൾ തിരഞ്ഞെടുക്കുക:';
+        document.getElementById('labelGrams').textContent = 'ഭാരം (ഗ്രാം):';
+        document.getElementById('labelRupees').textContent = 'നിങ്ങളുടെ ബജറ്റ് (രൂപ):';
+        document.getElementById('labelDelivery').textContent = 'ഡെലിവറി ദൂരം (കണ്ണൂർ ടൗണിൽ നിന്ന്):';
+      } else {
+        document.getElementById('calcIntro').textContent = 'Select a festival flower variety. Enter either how many grams you need OR how much rupees you want to spend — the engine dynamically computes the exact quantity and delivery fee.';
+        document.getElementById('labelSelectFlower').textContent = 'SELECT FLOWER VARIETY:';
+        document.getElementById('labelGrams').textContent = 'OPTION A: ENTER GRAMS:';
+        document.getElementById('labelRupees').textContent = 'OPTION B: SPEND BUDGET ₹:';
+        document.getElementById('labelDelivery').textContent = 'DELIVERY DISTANCE (FROM HUB):';
+      }
+    }
+
+    onGramsChange();
+  </script>
+</body>
+</html>
