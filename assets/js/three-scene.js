@@ -394,11 +394,7 @@
     emissive: 0x003b4d
   });
   const p2Body = new THREE.Mesh(p2Geo, p2Mat);
-  const p2Wire = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(2.14, 1),
-    new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true, transparent: true, opacity: 0.7 })
-  );
-  p2Sys.add(p2Body, p2Wire);
+  p2Sys.add(p2Body);
 
   const satGeo = new THREE.SphereGeometry(0.18, 12, 12);
   const satMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
@@ -539,14 +535,10 @@
     emissive: 0x001f29
   });
   const p5Body = new THREE.Mesh(p5Geo, p5Mat);
-  const p5InnerCore = new THREE.Mesh(
-    new THREE.SphereGeometry(1.2, 24, 24),
-    new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true, transparent: true, opacity: 0.45 })
-  );
   const p5Ring = createPlanetaryRing(2.5, 3.4, 0x00e5ff);
   const p5Atmo = createAtmosphere(2.0, 0x00ffcc, 0.35);
   const p5Life = createPlanetaryLife(110, 0x00ffcc, 2.2, 4.6, 'buoyant'); // Deep-sea plankton & buoyancy bubbles
-  p5Sys.add(p5Body, p5InnerCore, p5Ring, p5Atmo, p5Life.points);
+  p5Sys.add(p5Body, p5Ring, p5Atmo, p5Life.points);
   p5Sys.position.set(8, -27, -22);
   planetsGroup.add(p5Sys);
 
@@ -565,7 +557,6 @@
     body: p5Body,
     life: p5Life,
     orbitSpeed: 0.006,
-    innerCore: p5InnerCore,
     ring: p5Ring,
     diveOffset: new THREE.Vector3(2.6, 0.6, 5.2)
   });
@@ -580,13 +571,9 @@
     emissive: 0x112200
   });
   const p6Body = new THREE.Mesh(p6Geo, p6Mat);
-  const p6Shield = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(2.4, 2),
-    new THREE.MeshBasicMaterial({ color: 0xcaff00, wireframe: true, transparent: true, opacity: 0.4 })
-  );
   const p6Atmo = createAtmosphere(1.85, 0xcaff00, 0.22);
   const p6Life = createPlanetaryLife(75, 0xcaff00, 2.2, 4.0, 'orbit'); // Geodesic security token sparks
-  p6Sys.add(p6Body, p6Shield, p6Atmo, p6Life.points);
+  p6Sys.add(p6Body, p6Atmo, p6Life.points);
   p6Sys.position.set(-8, -35, -26);
   planetsGroup.add(p6Sys);
 
@@ -605,7 +592,6 @@
     body: p6Body,
     life: p6Life,
     orbitSpeed: 0.007,
-    shield: p6Shield,
     diveOffset: new THREE.Vector3(-2.6, 0.4, 4.8)
   });
 
@@ -666,10 +652,6 @@
     emissive: 0x223300
   });
   const p8Body = new THREE.Mesh(p8Geo, p8Mat);
-  const p8Wire = new THREE.Mesh(
-    new THREE.DodecahedronGeometry(2.25, 0),
-    new THREE.MeshBasicMaterial({ color: 0xcaff00, wireframe: true, transparent: true, opacity: 0.85 })
-  );
   const logicCubes = [];
   for (let i = 0; i < 6; i++) {
     const mc = new THREE.Mesh(
@@ -681,7 +663,7 @@
   }
   const p8Atmo = createAtmosphere(2.2, 0xcaff00, 0.3);
   const p8Life = createPlanetaryLife(100, 0xcaff00, 2.3, 4.8, 'orbit'); // Matrix code rain & logic sparks
-  p8Sys.add(p8Body, p8Wire, p8Atmo, p8Life.points);
+  p8Sys.add(p8Body, p8Atmo, p8Life.points);
   p8Sys.position.set(-7, -51, -34);
   planetsGroup.add(p8Sys);
 
@@ -1083,17 +1065,6 @@
         });
       }
 
-      // Aquarium Inner Core
-      if (p.innerCore) {
-        p.innerCore.rotation.x += 0.01;
-        p.innerCore.rotation.y += 0.015;
-      }
-
-      // JAH Mess Shield
-      if (p.shield) {
-        p.shield.rotation.y -= 0.008;
-        p.shield.rotation.z += 0.005;
-      }
 
       // CafeMaster Radio Waves
       if (p.radioWaves) {
