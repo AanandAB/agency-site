@@ -42,9 +42,15 @@
     mercury:     textureLoader.load('assets/textures/mercury.jpg'),
     moon:        textureLoader.load('assets/textures/moon.jpg'),
     uranus:      textureLoader.load('assets/textures/uranus.jpg'),
-    milkyway:    textureLoader.load('assets/textures/milky_way.jpg'),
+    milkyway:    textureLoader.load('assets/textures/stars_8k.jpg'),
     sun:         textureLoader.load('assets/textures/sun.jpg')
   };
+
+  // Maximize texture sharpness (anisotropic filtering + sRGB color space)
+  Object.values(TEX).forEach((t) => {
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    t.colorSpace = THREE.SRGBColorSpace;
+  });
 
   // Soft round star sprite (procedural radial glow) - replaces square points
   function createStarSprite() {
@@ -62,7 +68,7 @@
   }
   const starSprite = createStarSprite();
 
-  // Real Milky Way backdrop (slowly rotating skybox sphere)
+  // High-resolution 8K starfield backdrop (slowly rotating skybox sphere)
   const milkyWaySphere = new THREE.Mesh(
     new THREE.SphereGeometry(900, 64, 64),
     new THREE.MeshBasicMaterial({ map: TEX.milkyway, side: THREE.BackSide, fog: false, depthWrite: false })
