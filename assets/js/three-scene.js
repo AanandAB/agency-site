@@ -31,15 +31,19 @@
   // -------------------------------------------------------------
   const textureLoader = new THREE.TextureLoader();
   const TEX = {
-    earth:    textureLoader.load('assets/textures/earth_daymap.jpg'),
-    jupiter:  textureLoader.load('assets/textures/jupiter.jpg'),
-    saturn:   textureLoader.load('assets/textures/saturn.jpg'),
-    mars:     textureLoader.load('assets/textures/mars.jpg'),
-    neptune:  textureLoader.load('assets/textures/neptune.jpg'),
-    mercury:  textureLoader.load('assets/textures/mercury.jpg'),
-    moon:     textureLoader.load('assets/textures/moon.jpg'),
-    uranus:   textureLoader.load('assets/textures/uranus.jpg'),
-    milkyway: textureLoader.load('assets/textures/milky_way.jpg')
+    earth:       textureLoader.load('assets/textures/earth_daymap.jpg'),
+    earthClouds: textureLoader.load('assets/textures/earth_clouds.jpg'),
+    earthNight:  textureLoader.load('assets/textures/earth_nightmap.jpg'),
+    jupiter:     textureLoader.load('assets/textures/jupiter.jpg'),
+    saturn:      textureLoader.load('assets/textures/saturn.jpg'),
+    saturnRing:  textureLoader.load('assets/textures/saturn_ring_alpha.png'),
+    mars:        textureLoader.load('assets/textures/mars.jpg'),
+    neptune:     textureLoader.load('assets/textures/neptune.jpg'),
+    mercury:     textureLoader.load('assets/textures/mercury.jpg'),
+    moon:        textureLoader.load('assets/textures/moon.jpg'),
+    uranus:      textureLoader.load('assets/textures/uranus.jpg'),
+    milkyway:    textureLoader.load('assets/textures/milky_way.jpg'),
+    sun:         textureLoader.load('assets/textures/sun.jpg')
   };
 
   // Soft round star sprite (procedural radial glow) - replaces square points
@@ -64,6 +68,33 @@
     new THREE.MeshBasicMaterial({ map: TEX.milkyway, side: THREE.BackSide, fog: false, depthWrite: false })
   );
   scene.add(milkyWaySphere);
+
+  // -------------------------------------------------------------
+  // Sun with corona glow + lens flare
+  // -------------------------------------------------------------
+  const sunGroup = new THREE.Group();
+  const sunMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(4.5, 48, 48),
+    new THREE.MeshBasicMaterial({ map: TEX.sun, color: 0xfff0d0, fog: false })
+  );
+  sunGroup.add(sunMesh);
+  sunGroup.position.set(25, 20, -15);
+
+  function createGlowSprite(size, color, opacity) {
+    const s = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: starSprite, color: color, transparent: true, opacity: opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false, fog: false
+    }));
+    s.scale.set(size, size, 1);
+    return s;
+  }
+  sunGroup.add(createGlowSprite(18, 0xffe0a0, 0.42));
+  sunGroup.add(createGlowSprite(40, 0xffb060, 0.20));
+  const sunFlareStreak = createGlowSprite(1, 0xffffff, 0.30);
+  sunFlareStreak.scale.set(85, 2.5, 1);
+  sunGroup.add(sunFlareStreak);
+  sunGroup.add(createGlowSprite(9, 0xffd0a0, 0.5));
+  scene.add(sunGroup);
 
   // -------------------------------------------------------------
   // 2. Cosmic Lighting (Distant Sun + Ambient + Color Accents)
@@ -248,6 +279,30 @@
     return ring;
   }
 
+  // Textured ring with radial UV remap (real Saturn ring with Cassini division)
+  function createTexturedRing(innerR, outerR, texture) {
+    const ringGeo = new THREE.RingGeometry(innerR, outerR, 128, 1);
+    const pos = ringGeo.attributes.position;
+    const uv = ringGeo.attributes.uv;
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i), y = pos.getY(i);
+      const r = Math.sqrt(x * x + y * y);
+      uv.setXY(i, (Math.atan2(y, x) / (2 * Math.PI)) + 0.5, 1 - (r - innerR) / (outerR - innerR));
+    }
+    const ringMat = new THREE.MeshStandardMaterial({
+      map: texture,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.92,
+      roughness: 0.85,
+      metalness: 0.0,
+      depthWrite: false
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI / 2.3;
+    return ring;
+  }
+
   // Helper: Create Living Planetary Atmospheric Particle Ecosystem
   function createPlanetaryLife(count, colorHex, radiusMin, radiusMax, type = 'orbit') {
     const geo = new THREE.BufferGeometry();
@@ -332,7 +387,7 @@
     metalness: 0.0
   });
   const p1Body = new THREE.Mesh(p1Geo, p1Mat);
-  const p1Ring = createPlanetaryRing(2.4, 3.8, 0xd8c9a3);
+  const p1Ring = createTexturedRing(2.4, 3.8, TEX.saturnRing);
   const p1Atmo = createAtmosphere(1.9, 0x9db8ff, 0.15);
   const p1Life = createPlanetaryLife(90, 0xffd700, 2.3, 4.5, 'orbit'); // Golden revenue data dust
   p1Sys.add(p1Body, p1Ring, p1Atmo, p1Life.points);
@@ -407,10 +462,18 @@
   const p3Geo = new THREE.SphereGeometry(1.85, 32, 32);
   const p3Mat = new THREE.MeshStandardMaterial({
     map: TEX.earth,
+    emissiveMap: TEX.earthNight,
+    emissive: new THREE.Color(0xffffff),
+    emissiveIntensity: 0.55,
     roughness: 0.6,
     metalness: 0.0
   });
   const p3Body = new THREE.Mesh(p3Geo, p3Mat);
+  const p3Clouds = new THREE.Mesh(
+    new THREE.SphereGeometry(1.87, 48, 48),
+    new THREE.MeshStandardMaterial({ map: TEX.earthClouds, transparent: true, opacity: 0.55, depthWrite: false, roughness: 1.0, metalness: 0.0 })
+  );
+  p3Clouds.rotation.y = 2.0;
   const p3Orbit1 = new THREE.Mesh(
     new THREE.TorusGeometry(2.6, 0.04, 16, 64),
     new THREE.MeshBasicMaterial({ color: 0xcaff00, transparent: true, opacity: 0.85 })
@@ -423,7 +486,7 @@
   p3Orbit2.rotation.y = Math.PI / 2.8;
   const p3Atmo = createAtmosphere(1.85, 0x88b0ff, 0.18);
   const p3Life = createPlanetaryLife(95, 0xcaff00, 2.1, 4.4, 'spore'); // Emerald botanical delivery spores
-  p3Sys.add(p3Body, p3Orbit1, p3Orbit2, p3Atmo, p3Life.points);
+  p3Sys.add(p3Body, p3Clouds, p3Orbit1, p3Orbit2, p3Atmo, p3Life.points);
   p3Sys.position.set(7.5, -11, -10);
   planetsGroup.add(p3Sys);
 
@@ -443,6 +506,7 @@
     life: p3Life,
     orbitSpeed: 0.007,
     orbits: [p3Orbit1, p3Orbit2],
+    clouds: p3Clouds,
     diveOffset: new THREE.Vector3(2.5, -0.5, 4.7)
   });
 
@@ -804,45 +868,6 @@
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  // -------------------------------------------------------------
-  // Real NASA textures (Solar System Scope - CC BY 4.0) + soft star sprites
-  // -------------------------------------------------------------
-  const textureLoader = new THREE.TextureLoader();
-  const TEX = {
-    earth:    textureLoader.load('assets/textures/earth_daymap.jpg'),
-    jupiter:  textureLoader.load('assets/textures/jupiter.jpg'),
-    saturn:   textureLoader.load('assets/textures/saturn.jpg'),
-    mars:     textureLoader.load('assets/textures/mars.jpg'),
-    neptune:  textureLoader.load('assets/textures/neptune.jpg'),
-    mercury:  textureLoader.load('assets/textures/mercury.jpg'),
-    moon:     textureLoader.load('assets/textures/moon.jpg'),
-    uranus:   textureLoader.load('assets/textures/uranus.jpg'),
-    milkyway: textureLoader.load('assets/textures/milky_way.jpg')
-  };
-
-  // Soft round star sprite (procedural radial glow) - replaces square points
-  function createStarSprite() {
-    const c = document.createElement('canvas');
-    c.width = 64; c.height = 64;
-    const ctx = c.getContext('2d');
-    const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    g.addColorStop(0, 'rgba(255,255,255,1)');
-    g.addColorStop(0.25, 'rgba(255,255,255,0.9)');
-    g.addColorStop(0.6, 'rgba(255,255,255,0.25)');
-    g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, 64, 64);
-    return new THREE.CanvasTexture(c);
-  }
-  const starSprite = createStarSprite();
-
-  // Real Milky Way backdrop (slowly rotating skybox sphere)
-  const milkyWaySphere = new THREE.Mesh(
-    new THREE.SphereGeometry(900, 64, 64),
-    new THREE.MeshBasicMaterial({ map: TEX.milkyway, side: THREE.BackSide, fog: false, depthWrite: false })
-  );
-  scene.add(milkyWaySphere);
   });
 
   // -------------------------------------------------------------
@@ -1086,6 +1111,11 @@
           lc.mesh.rotation.x += 0.03;
           lc.mesh.rotation.y += 0.02;
         });
+      }
+
+      // Earth cloud layer drift
+      if (p.clouds) {
+        p.clouds.rotation.y += 0.0006;
       }
 
       // Hover scale lerp
